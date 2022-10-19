@@ -1,0 +1,463 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <groupId>com.stb.sgm</groupId>
+    <artifactId>stb-sgm-application</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+		<module>stb-sgm-common</module>
+		<module>stb-sgm-databases</module>
+		<module>stb-sgm-business</module>
+		<module>stb-sgm-web-console</module>
+    </modules>
+    <name>STB SGM</name>
+
+    <url>http://maven.apache.org</url>
+
+    <properties>
+
+		<!-- SPRING VERSION -->
+        <lib.spring.core.version>4.3.10.RELEASE</lib.spring.core.version>
+        <lib.spring.security.version>4.2.3.RELEASE</lib.spring.security.version>
+        
+        <!-- Hibernate & Persistense -->
+        <lib.hibernate.core.version>5.2.10.Final</lib.hibernate.core.version>
+
+        <!-- SPTING JPA -->
+        <lib.spring.jpa.version>1.11.6.RELEASE</lib.spring.jpa.version>
+		<lib.h2database.version>1.4.196</lib.h2database.version>
+
+		<!-- validation -->
+		<lib.hibernate.validator.version>6.0.2.Final</lib.hibernate.validator.version>
+		<lib.javax.el-api.version>2.2.5</lib.javax.el-api.version>
+		<lib.xml-apis.version>1.4.01</lib.xml-apis.version>
+		<lib.javassist.version>3.21.0-GA</lib.javassist.version>
+
+
+		<!-- DATABASE CONNECTOR -->
+		<!--  mysql:mysql-connector-java:jar:5.1.43:runtime -->
+		<lib.mysql.connector.version>6.0.6</lib.mysql.connector.version>
+
+		<lib.sqlserver.jdbc.driver.version>4.0</lib.sqlserver.jdbc.driver.version>
+		<!-- lib.sqlserver.jdbc.driver2.version>6.2.1.jre8</lib.sqlserver.jdbc.driver2.version -->
+		<lib.sqlserver.jdbc.driver2.version>7.4.1.jre8</lib.sqlserver.jdbc.driver2.version>
+
+		<!-- JACKSON FASTER XML -->
+        <lib.fasterxml.jackson.version>2.9.0</lib.fasterxml.jackson.version>
+        <lib.fasterxml.classmate.version>1.3.3</lib.fasterxml.classmate.version>
+
+		<!-- SERVLET & HTTP DEPENDENCY -->
+        <lib.javax.servlet.api.version>4.0.0</lib.javax.servlet.api.version>
+		<lib.javax.servlet.jstl.version>1.2</lib.javax.servlet.jstl.version>
+		<lib.apache.httpclient.version>4.5.3</lib.apache.httpclient.version>
+		 
+		
+		<!-- GENERICS LIB -->
+		<lib.commons.fileupload.version>1.3.3</lib.commons.fileupload.version>
+		<lib.google.guava.version>24.0-jre</lib.google.guava.version>
+
+		<!-- LOGS & SLF4J/Logback & JUNIT -->
+        <!--  -->
+		<lib.log.logback.classic.version>1.1.7</lib.log.logback.classic.version>
+		<lib.log.org.slf4j.version>1.7.25</lib.log.org.slf4j.version>
+		<lib.junit.version>4.12</lib.junit.version>
+		
+		<!-- UTF 8 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- JAVA -->
+        <conf.java.version>11</conf.java.version>
+
+        <!-- PLUGINS -->
+        <plugin.maven.compiler.version>3.1</plugin.maven.compiler.version>
+		<plugin.maven.jar.version>3.0.2</plugin.maven.jar.version>
+		<plugin.maven.war.version>3.1.0</plugin.maven.war.version>
+		<plugin.tomcat7.version>2.2</plugin.tomcat7.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+			<!-- PROJECT MODULES -->
+			<dependency>
+				<groupId>com.stb.sgm</groupId>
+				<artifactId>stb-sgm-common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.stb.sgm</groupId>
+				<artifactId>stb-sgm-business</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.stb.sgm</groupId>
+				<artifactId>stb-sgm-databases</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			
+			
+			<!-- FASTER XML -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${lib.fasterxml.jackson.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${lib.fasterxml.jackson.version}</version>
+			</dependency>
+
+			<!--
+			<dependency>
+				<groupId>com.fasterxml.jackson.datatype</groupId>
+				<artifactId>jackson-datatype-jsr310</artifactId>
+				<version>${lib.fasterxml.jackson.version}2.4.0</version>
+			</dependency>
+			-->
+
+			<dependency>
+				<groupId>com.fasterxml</groupId>
+				<artifactId>classmate</artifactId>
+				<version>${lib.fasterxml.classmate.version}</version>
+			</dependency>
+
+
+			<!-- JPA -->
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-jpa</artifactId>
+				<version>${lib.spring.jpa.version}</version>
+			</dependency>
+
+			<!--  HIBERNATE -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-core</artifactId>
+				<version>${lib.hibernate.core.version}</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>xml-apis</artifactId>
+						<groupId>xml-apis</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>cdi-api</artifactId>
+						<groupId>javax.enterprise</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+
+
+			<dependency>
+				<groupId>com.h2database</groupId>
+				<artifactId>h2</artifactId>
+				<version>${lib.h2database.version}</version>
+			</dependency>
+
+			<!-- VALIDATION -->
+			<dependency>
+				<groupId>xml-apis</groupId>
+				<artifactId>xml-apis</artifactId>
+				<version>${lib.xml-apis.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.javassist</groupId>
+				<artifactId>javassist</artifactId>
+				<version>${lib.javassist.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.hibernate.validator</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>${lib.hibernate.validator.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.el</groupId>
+				<artifactId>javax.el-api</artifactId>
+				<version>${lib.javax.el-api.version}</version>
+			</dependency>
+
+			<!-- DATABASE CONNECTOR -->
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${lib.mysql.connector.version}</version>
+				<scope>runtime</scope>
+				<!--scope>runtime</scope-->
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/sqljdbc4 -->
+			<dependency>
+				<groupId>com.microsoft.sqlserver</groupId>
+				<artifactId>sqljdbc4</artifactId>
+				<version>${lib.sqlserver.jdbc.driver.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>com.microsoft.sqlserver</groupId>
+				<artifactId>mssql-jdbc</artifactId>
+				<version>${lib.sqlserver.jdbc.driver2.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+
+
+			<!-- SPRING -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${lib.spring.core.version}</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>commons-logging</artifactId>
+						<groupId>commons-logging</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${lib.spring.core.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-web</artifactId>
+				<version>${lib.spring.security.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-config</artifactId>
+				<version>${lib.spring.security.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-taglibs</artifactId>
+				<version>${lib.spring.security.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${lib.spring.core.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-tx</artifactId>
+				<version>${lib.spring.core.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+				<version>${lib.spring.core.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context-support</artifactId>
+				<version>${lib.spring.core.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.springframework.integration/spring-integration-mail -->
+			<dependency>
+				<groupId>org.springframework.integration</groupId>
+				<artifactId>spring-integration-mail</artifactId>
+				<version>${lib.spring.core.version}</version>
+			</dependency>
+
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+				<version>${lib.spring.core.version}</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>commons-logging</artifactId>
+						<groupId>commons-logging</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			
+			
+			<!-- SERVLET & HTTP DEPENDENCY -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${lib.javax.servlet.api.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>jstl</artifactId>
+				<version>${lib.javax.servlet.jstl.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>${lib.apache.httpclient.version}</version>
+			</dependency>
+
+
+			<!-- LIB -->
+			<dependency>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+				<version>${lib.commons.fileupload.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${lib.google.guava.version}</version>
+			</dependency>
+
+			<!-- LOGS & SLF4J/Logback & JUNIT -->
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${lib.log.logback.classic.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${lib.log.org.slf4j.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>${lib.log.org.slf4j.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${lib.junit.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/javax.mail/javax.mail-api
+			<dependency>
+				<groupId>javax.mail</groupId>
+				<artifactId>javax.mail-api</artifactId>
+				<version>1.6.1</version>
+			</dependency>
+			-->
+
+			<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+			<dependency>
+				<groupId>javax.mail</groupId>
+				<artifactId>mail</artifactId>
+				<version>1.4.7</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+				<version>2.9.9</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.joda/joda-money -->
+			<dependency>
+				<groupId>org.joda</groupId>
+				<artifactId>joda-money</artifactId>
+				<version>0.12</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.jadira.usertype/usertype.core -->
+			<dependency>
+				<groupId>org.jadira.usertype</groupId>
+				<artifactId>usertype.core</artifactId>
+				<version>7.0.0.CR1</version>
+			</dependency>
+
+
+		</dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+				
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${plugin.maven.jar.version}</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>${plugin.maven.war.version}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat7-maven-plugin</artifactId>
+					<version>${plugin.tomcat7.version}</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${plugin.maven.compiler.version}</version>
+					<configuration>
+						<source>${conf.java.version}</source>
+						<target>${conf.java.version}</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					 <groupId>org.sonarsource.scanner.maven</groupId>
+					 <artifactId>sonar-maven-plugin</artifactId>
+					 <version>3.7.0.1746</version>
+				</plugin>
+
+            </plugins>
+        </pluginManagement>
+        <plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${plugin.maven.compiler.version}</version>
+				<configuration>
+					<source>${conf.java.version}</source>
+					<target>${conf.java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<!--version>3.7.0.1746</version-->
+				<configuration>
+					
+				</configuration>
+			</plugin>
+             
+        </plugins>
+
+
+    </build>
+ 
+
+</project>
